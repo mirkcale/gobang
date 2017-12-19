@@ -13,7 +13,7 @@ export default class chessboard extends Component {
 
   componentDidMount () {
     this.drawChessBoard()
-    document.getElementById('chessboard').addEventListener('click', (e => this.drawChess(e)))
+    // document.getElementById('chessboard').addEventListener('click', (e => this.drawChess(e)))
   }
 
   drawChessBoard () {
@@ -34,10 +34,9 @@ export default class chessboard extends Component {
   drawChess (e) {
     var chess = document.getElementById("chessboard");
     var context = chess.getContext('2d');
-
-    var x =  Math.floor(e.offsetX / 30);
-    var y =  Math.floor(e.offsetY/ 30);
-    let player = this.props.addChess.player || 'white'
+    var x =  Math.floor(e.nativeEvent.offsetX / 30);
+    var y =  Math.floor(e.nativeEvent.offsetY/ 30);
+    let player = this.props.golang ? this.props.golang.player : 'white'
     context.beginPath();
     context.arc(15 + x * 30, 15 + y * 30, 13, 0, 2 * Math.PI);//画圆
     context.closePath();
@@ -70,8 +69,8 @@ export default class chessboard extends Component {
           style={{ display: 'block',
             margin: '50px auto',
             boxShadow: '-2px -2px 2px #efefef, 5px 5px 5px #b9b9b9'}}
+          onClick={e => {this.drawChess(e)}}
         />
-        <p onClick={e => console.log(e[[target]])}>pi</p>
         {['悔棋', '撤销'].map(i => (
           <button key={i}>{i}</button>
         ))}

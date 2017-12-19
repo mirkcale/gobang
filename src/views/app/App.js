@@ -8,7 +8,7 @@ class App extends Component {
     let {dispatch, state} = this.props
     return (
       <div>
-        <ChessBoard dispatch={dispatch} state={state} />
+        <ChessBoard dispatch={dispatch} golang={state.golang} />
       </div>
     )
   }
