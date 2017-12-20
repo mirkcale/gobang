@@ -3,3 +3,4 @@
  */
 export const ADD_CHESS = 'ADD_CHESS'
 export const SWITCH_PLAYER = 'SWITCH_PLAYER'
+export const RESET_GAME = 'RESET_GAME'

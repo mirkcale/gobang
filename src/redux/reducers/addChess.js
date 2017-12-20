@@ -1,6 +1,7 @@
 /**
  * Created by lyy on 2017/12/18.
  */
+import undoable from 'redux-undo'
 import initialStore from '../store'
 const addChess =  (state = initialStore, action) => {
   switch (action.type) {
@@ -9,9 +10,13 @@ const addChess =  (state = initialStore, action) => {
         player: action.payload.player === 'white' ? 'black' : 'white',
         container: {...state.container, ...{[action.payload.player]: [...state.container[action.payload.player].concat([action.payload.position])]}}
       }
+    case 'RESET_GAME':
+      return initialStore
     default:
       return state
   }
 }
 
-export default addChess
+export default undoable(addChess, {
+  clearHistoryType: 'RESET_GAME'
+})
