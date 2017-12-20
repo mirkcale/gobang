@@ -2,14 +2,16 @@
  * Created by lyy on 2017/12/18.
  */
 import initialStore from '../store'
-export default (state = initialStore, action) => {
+const addChess =  (state = initialStore, action) => {
   switch (action.type) {
     case 'ADD_CHESS':
       return {
-        ...state,
-        player: action.payload.player === 'white' ? 'black' : 'white'
+        player: action.payload.player === 'white' ? 'black' : 'white',
+        container: {...state.container, ...{[action.payload.player]: [...state.container[action.payload.player].concat([action.payload.position])]}}
       }
     default:
       return state
   }
 }
+
+export default addChess
