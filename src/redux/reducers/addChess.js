@@ -1,8 +1,10 @@
 /**
  * Created by lyy on 2017/12/18.
  */
+import undoable from 'redux-undo'
 import initialStore from '../store'
 const addChess =  (state = initialStore, action) => {
+  console.log(action)
   switch (action.type) {
     case 'ADD_CHESS':
       return {
@@ -14,4 +16,4 @@ const addChess =  (state = initialStore, action) => {
   }
 }
 
-export default addChess
+export default undoable(addChess)

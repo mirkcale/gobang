@@ -2,6 +2,7 @@
  * Created by lyy on 2017/12/19.
  */
 import React, { Component } from 'react'
+import UndoRedo from '../container/UndoRedo'
 import addChessCreator from '../redux/actions/addChess'
 
 export default class chessboard extends Component {
@@ -18,7 +19,7 @@ export default class chessboard extends Component {
 
   hasChess (position) {
     let hasChessFlag = false
-    let {black, white} = this.props.golang.container
+    let {black, white} = this.props.golang.present.container
     const unique = (position, array) => {
       let length = array && array.length
       if(length === 0){
@@ -57,7 +58,7 @@ export default class chessboard extends Component {
   oneStep (e) {
     var x = Math.floor(e.nativeEvent.offsetX / 30);
     var y = Math.floor(e.nativeEvent.offsetY / 30);
-    let player = this.props.golang ? this.props.golang.player : 'white'
+    let player = this.props.golang && this.props.golang.present ? this.props.golang.present.player : 'white'
     if(this.hasChess([x, y])){
       return
     }
@@ -81,11 +82,11 @@ export default class chessboard extends Component {
     }
     context.fillStyle = gradient;
     context.fill();
+    context.beginPath();
   }
 
   componentWillReceiveProps(nextProps){
-    let {black, white} = nextProps.golang.container
-    console.log(black, white)
+    let {black, white} = nextProps.golang.present.container
     this.drawChessBoard()
     black.map(i => this.drawChess(i[0], i[1], 'black'))
     white.map(i => this.drawChess(i[0], i[1], 'white'))
@@ -103,9 +104,7 @@ export default class chessboard extends Component {
             boxShadow: '-2px -2px 2px #efefef, 5px 5px 5px #b9b9b9'}}
           onClick={e => {this.oneStep(e)}}
         />
-        {['悔棋', '撤销'].map(i => (
-          <button key={i}>{i}</button>
-        ))}
+        <UndoRedo/>
       </div>
     )
   }
