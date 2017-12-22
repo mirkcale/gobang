@@ -4,7 +4,6 @@
 import undoable from 'redux-undo'
 import initialStore from '../store'
 const addChess =  (state = initialStore, action) => {
-  console.log(action)
   switch (action.type) {
     case 'ADD_CHESS':
       return {

@@ -19,15 +19,15 @@ export default class chessboard extends Component {
 
   hasChess (position) {
     let hasChessFlag = false
-    let {black, white} = this.props.golang.present.container
+    let { black, white } = this.props.golang.present.container
     const unique = (position, array) => {
       let length = array && array.length
-      if(length === 0){
+      if (length === 0) {
         return hasChessFlag
       }
       let [x, y] = position
       for (let i = 0; i < length; i++) {
-        if(x === array[i][0] && y === array[i][1]){
+        if (x === array[i][0] && y === array[i][1]) {
           hasChessFlag = true
           break
         }
@@ -59,7 +59,7 @@ export default class chessboard extends Component {
     var x = Math.floor(e.nativeEvent.offsetX / 30);
     var y = Math.floor(e.nativeEvent.offsetY / 30);
     let player = this.props.golang && this.props.golang.present ? this.props.golang.present.player : 'white'
-    if(this.hasChess([x, y])){
+    if (this.hasChess([x, y])) {
       return
     }
     this.props.dispatch(addChessCreator([x, y], player))
