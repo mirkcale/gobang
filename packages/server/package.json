@@ -1,0 +1,15 @@
+{
+  "name": "@gobang/server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node --watch src/index.js",
+    "start": "node src/index.js"
+  },
+  "dependencies": {
+    "@gobang/shared": "workspace:*",
+    "uuid": "^9.0.0",
+    "ws": "^8.16.0"
+  }
+}
